@@ -38,10 +38,10 @@
         <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="FirebasePlugin">
+    <!-- <feature name="FirebasePlugin">
         <param name="android-package" value="org.apache.cordova.firebase.FirebasePlugin" />
         <param name="onload" value="true" />
-    </feature>
+    </feature> -->
     <name>VM-Jio</name>
     <description>
         Accounting App for Jio
@@ -56,7 +56,7 @@
             <application android:usesCleartextTraffic="true" />
         </edit-config>
     </platform>
-    <preference name="android-minSdkVersion" value="19.1.0" />
+    <preference name="android-minSdkVersion" value="20" />
     <preference name="android-minSdkVersion" value="28" />
     <preference name="phonegap-version" value="cli-9.0.0" />
 
