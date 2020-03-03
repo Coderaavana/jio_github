@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/matstyle.css" media="screen,projection">
+    <link rel="stylesheet" href="css/home1.css" media="screen,projection">
+    <link rel="stylesheet" href="css/my.min.css">
+    <script src="cordova.js" type="text/javascript"></script>
+    <style>
+        .add button, .add1 button {
+            background: #7972e6;
+            color: #fff;
+            width: 49%;
+            padding: 2vh;
+        }
+        h1{
+            padding: 2vh;
+        }
+        .form{
+            background: #fff;
+            border-radius: 2vh;
+            padding: 2vh;
+            color: black;
+            box-shadow: 0 0 10px 0 rgba(45, 45, 45, 0.38);
+        }
+    </style>
+</head>
+
+
+<body>
+
+<div class="head">
+  <div class="content">
+    <a href="notes.html"><div class="left"><img src="icon/left.png"></div></a>
+    <div class="middle">Create Note</div>
+    <div class="right"><a href="logout.html"><img src="icon/logout.png"></a></div>
+  </div>  
+</div>
+
+
+  <form id="add_notes">
+    <div class="form">
+       <table>
+           <tr>
+               <td><b><h1>Heading</h1></b></td>
+               <td><b><p>:</p></b></td>
+               <td><h1 id="notes_heading"></h1></td>
+           </tr>
+           <tr>
+                <td><b><h1>Description</h1></b></td>
+                <td>:</td>
+                <td><h1 id="Description"></h1></td>
+            </tr>
+       </table>           
+    </div>
+    
+
+    <div class="add">
+      <input type="hidden" id="notes_id" name="notes_id"/>
+      <button type="button" id="delete">Delete Note</button>
+      <a href="" id="edit_link"><button type="button" id="submit">Edit Note</button></a>
+    </div>
+  </form>
+</body>
+
+<script  type="text/javascript" src="js/jquery.min.js"></script>
+<script src="js/getservices.js"></script>
+<script type="text/javascript" src="js/geturi.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    var id = decodeURI(getUrlVars()["notes_id"]); 
+    $("#notes_id").val(id);      
+    var service = getservice();
+    var url = service+'view_note.php?notes_id='+id;
+
+    $.getJSON(url, function(field) {                         
+        $("#notes_heading").html(field.heading);
+        $("#Description").html(field.notes);                      
+    });            
+    $("#edit_link").attr('href', 'edit_notes.html?notes_id='+id);
+  });
+
+  $("#delete").click(function(e){
+    e.preventDefault();
+    
+    var notes_id = $("#notes_id").val();
+    var dataString="notes_id="+notes_id;
+
+    if (confirm("Are you sure you wan to delete this?")) {
+    
+        var service = getservice();
+        var uri = service+'delete_notes.php';
+        
+        
+        $.ajax({
+            type: 'GET',
+            url: uri,
+            data: dataString,  
+            dataType: "json",          
+            crossDomain: true,
+            cache:false,
+            processData: false,
+            contentType: false,
+            success: function(data){
+            	var objData = data;
+	            	if(objData['code'] == 0)
+	            	{
+	            		alert(objData['msg']);
+						      setTimeout(function()
+                                {
+                                    window.location.href='notes.html';
+                                }, 1000); 
+                }
+                else
+                {
+                  alert(objData['msg']);
+                }
+              },
+            });	  
+    }
+    return false;
+  });
+
+  $("#add_notes").submit(function(e) {
+    e.preventDefault();
+    var dataString = new FormData(this);
+    
+    var service = getservice();
+    var uri = service+'add_notes.php';
+		 $.ajax({
+            type: 'POST',
+            url: uri,
+            data: dataString,
+            // dataType: "text",
+            crossDomain: true,
+            cache:false,
+            processData: false,
+            contentType: false,
+            success: function(data){
+            	var objData = jQuery.parseJSON(data);
+	            	if(objData['code'] == 0)
+	            	{
+	            		alert(objData['msg']);
+						      setTimeout(function()
+                                {
+                                    window.location.href='notes.html';
+                                }, 1000); 
+                }
+                else
+                {
+                  alert(objData['msg']);
+                }
+              },
+    });	  
+});
+</script>
+</html>

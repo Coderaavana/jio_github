@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/matstyle.css" media="screen,projection">
+    <link rel="stylesheet" href="css/home1.css" media="screen,projection">
+    <link rel="stylesheet" href="css/my.min.css">
+    <script src="cordova.js" type="text/javascript"></script>
+   
+</head>
+<body>
+
+<div class="head">
+  <div class="content">
+    <a href="home.html"><div class="left"><img src="icon/left.png"></div></a>
+    <div class="middle">VM Distributors</div>
+    <div class="right"><a href="logout.html"><img src="icon/logout.png"></a></div>
+  </div>  
+</div>
+  <a href="create_notes.html">
+    <div class="account">
+      <button>Add Notes</button>
+    </div>
+  </a>
+<div class="acview" id="view_notes">       
+</div>
+</body>
+<script  type="text/javascript" src="js/jquery.min.js"></script>
+<script src="js/getservices.js"></script>
+<script>
+$(document).ready(function() {  
+        var id=window.localStorage.getItem("uid");
+        var service = getservice();
+        var url = service+'get_notes.php?user_id='+id;
+        $.getJSON(url, function(result) {
+            $.each(result, function(i, field) {                   
+              $('#view_notes').append('<a href="view_notes.html?notes_id='+field.notesId+'"><div class="acpanel"><div class="div2"><p>'+field.heading+'</p>'+field.notes+'</div></div></a>');            
+            });
+        });  
+});          
+</script>
+</html>

@@ -1,0 +1,564 @@
+body {
+    background: #ededed;
+    position: relative;
+}
+.tt {
+    background: #7972e6;
+    color: #fff;
+    width: 100vw;
+    height: 55vh;
+    text-align: center;
+    border-radius: 0 0 25px 25px;
+    position: absolute;
+}
+.tt .title {
+    padding-top: 20vh;
+    font-size: 22px;
+}
+.tt .title span {
+    font-size: 32px;
+}
+.tt-1 {
+    background: #7972e6;
+    color: #fff;
+    width: 100vw;
+    height: 43vh;
+    text-align: center;
+    border-radius: 0 0 25px 25px;
+    position: absolute;
+}
+.tt-1 .title {
+    padding-top: 3vh;
+    font-size: 28px;
+}
+.tt-1 .sub {
+    padding-top: 5vh;
+    font-size: 22px;
+}
+.tt2 {
+    background: #7972e6;
+    color: #fff;
+    width: 100vw;
+    height: 43vh;
+    text-align: center;
+    border-radius: 0 0 50px 50px;
+    position: absolute;
+}
+.tt2 #logout img {
+    padding: 4vw 5vw 0 0;
+    float: right;
+}
+.tt2 .detail {
+    clear: both;
+}
+.tt2 .detail .pro img {
+    width: 22vw;
+    padding: 2vw;
+    border-radius: 50vw;
+    background: #fff;
+}
+.tt2 .detail .name {
+    font-size: 22px;
+    padding: 1vh;
+}
+.tt2 .detail .con {
+    font-size: 18px;
+    padding: 1vh;
+}
+.tt2 .detail .mail {
+    font-size: 18px;
+    padding: 1vh;
+}
+.panel {
+    position: relative;
+    margin: 0 auto;
+    width: 85vw;
+    padding-top: 40vh;
+}
+.panel .card1 {
+    background: #fff;
+    padding: 5vw;
+    float: left;
+    border-radius: 50px 0 50px 0;
+}
+.panel .card1 img {
+    width: 100px;
+}
+.panel .card1 .title {
+    color: #7972e6;
+    font-size: 18px;
+    text-align: center;
+}
+.panel .card2 {
+    background: #fff;
+    padding: 5vw;
+    float: right;
+    border-radius: 0 50px 0 50px;
+}
+.panel .card2 img {
+    width: 100px;
+}
+.panel .card2 .title {
+    color: #7972e6;
+    font-size: 18px;
+    text-align: center;
+}
+.panel1 {
+    position: relative;
+    margin: 0 auto;
+    width: 85vw;
+    padding-top: 25vh;
+}
+.panel1 .user {
+    text-align: center;
+    background: #fff;
+    color: #7972e6;
+    font-size: 18px;
+    padding: 3vw;
+    margin: 2vw;
+    border-radius: 3vw;
+}
+.card3 {
+    position: absolute;
+    width: 100vw;
+    margin-top: 40vh;
+    text-align: center;
+    padding: 8vw;
+}
+.card3 div {
+    padding: 5vw;
+    font-size: 20px;
+    background: #fff;
+    margin: 5vw;
+    border-radius: 5vw;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
+}
+.head {
+    background: #7972e6;
+    padding: 2vh;
+}
+.head .content div {
+    display: inline-block;
+}
+.head .content .middle {
+    color: #fff;
+    font-size: 22px;
+    padding: 0 0 0 12vw;
+    text-align: center;
+}
+.head .content .middles {
+    color: #fff;
+    font-size: 22px;
+    padding: 0 0 0 8vw;
+    text-align: center;
+}
+.head .content .middless {
+    color: #fff;
+    font-size: 22px;
+    padding: 0 0 0 20vw;
+    text-align: center;
+}
+.payment {
+    margin: 0 auto;
+    width: 85vw;
+}
+.payment .title {
+    text-align: center;
+    font-size: 22px;
+    padding: 5vw;
+}
+.payment .box {
+    padding: 1vw;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 5vw;
+    display: flex;
+    flex-wrap: wrap;
+    content: justify;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .2);
+}
+.payment .box div {
+    margin: 5vw;
+    font-size: 18px;
+    content: wrap;
+}
+.divbox {
+    background: #7972e6;
+    width: 100vw;
+    height: 30vh;
+    margin-top: 5vh;
+    padding: 4vw;
+}
+.divbox .conbox div {
+    display: inline-block;
+    background: #fff;
+    width: 44vw;
+    height: 16vh;
+    font-size: 20px;
+    text-align: center;
+    padding: 2.2vw;
+}
+.divbox .conbox div p {
+    margin-top: 5vw;
+}
+.divbox1 {
+    background: #fff;
+    width: 100vw;
+    padding: 13vw 0;
+    text-align: center;
+    font-size: 20px;
+}
+.divbox2 {
+    background: #7972e6;
+    width: 100vw;
+    padding: 5vw;
+}
+.divbox2 img {
+    width: 90vw;
+}
+.report {
+    margin: 0 auto;
+    height: 40vh;
+}
+.report .rediv {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3vh;
+    font-size: 18px;
+    padding: 2vw 5vw;
+    background: #fff;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .2);
+}
+.report .rediv img {
+    width: 10vw;
+}
+.account {
+    width: 100vw;
+    height: 20vh;
+    padding: 4vh;
+}
+.account button {
+    background: #dbd9d9;
+    color: #000;
+    width: 85vw;
+    border-radius: 10vw;
+    font-size: 18px;
+    padding: 8vw;
+}
+.acview {
+    background: #fff;
+    font-size: 13px;
+    border-bottom: 2px solid #d1cfcf;
+}
+.acview .acpanel {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-top: 2px solid #d1cfcf;
+    padding: 2vh 3vh;
+}
+.acview .acpanel p {
+    font-size: 18px;
+}
+.acview .acpanel img {
+    width: 7vh;
+    padding: 1vh;
+    border: 1px solid #7972e6;
+    border-radius: 50vh;
+}
+.profile {
+    margin: 0 auto;
+    margin-top: 2vh;
+    width: 92vw;
+    height: 28vh;
+    background: #7972e6;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 1vh;
+    color: #fff;
+    font-size: 16px;
+}
+.profile .img {
+    background: #fff;
+    border-radius: 55vh;
+    padding: 1vh;
+    margin: 0 3vw;
+}
+.profile .img img {
+    width: 10vh;
+}
+.profile .dls p {
+    margin-top: 3vh;
+}
+.ba {
+    margin: 0 auto;
+    margin-top: 2vh;
+    width: 92vw;
+    background: #7972e6;
+    padding: 2vh 2vh 6vh 2vh;
+    color: #fff;
+    font-size: 18px;
+}
+.ba .baa {
+    float: left;
+}
+.ba .bab {
+    float: right;
+}
+
+.user .form {
+    margin: 0 auto;
+    padding-top: 2vh;
+    width: auto;
+}
+.user input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea
+{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #a29c9c;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 1.5rem;
+    margin: 0 0 20px 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: all 0.3s;
+}
+
+.user input[type=submit]{
+    padding: 5vw;
+    font-size: 20px;
+    background: #7972e6;
+    border-radius: 5vw;
+    color: white;
+    width: 100%;
+}
+
+.form {
+    margin: 0 auto;
+    padding-top: 2vh;
+    width: 92vw;
+}
+.form label {
+    font-size: 15px;
+    color: #000;
+}
+::placeholder {
+    color: #000;
+}
+textarea {
+    height: 5vh;
+    padding: 10vh;
+    border: 5px solid #828181;
+    border-radius: 5vw;
+    margin-bottom: 2vh;
+}
+.add {
+    bottom: 0;
+    margin: 0 auto;
+    width: 92vw;
+    font-size: 18px;
+    padding-top: 10vh;
+}
+.add1 {
+    bottom: 0;
+    margin: 0 auto;
+    width: 92vw;
+    font-size: 18px;
+}
+.add button, .add1 button {
+    background: #7972e6;
+    color: #fff;
+    width: 92vw;
+    padding: 2vh;
+}
+.pr {
+    margin: 0 auto;
+    width: 92vw;
+    padding: 2vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #7972e6;
+}
+.pr .img {
+    background: #fff;
+    border-radius: 100vw;
+    padding: 1vh;
+}
+.sc {
+    margin: 0 auto;
+    width: 92vw;
+    padding-top: 7vh;
+}
+.sc select {
+    border: none;
+    background: #7972e6;
+    color: #fff;
+    border-radius: 5vw;
+    width: 92vw;
+    padding: 3vh;
+    font-size: 15px;
+}
+.loc {
+    margin: 0 auto;
+    width: 92vw;
+    background: #7972e6;
+    padding: 1vh 5vh;
+}
+.loc button {
+    background: #fff;
+    color: #000;
+    padding: 1vh 4vh;
+    border-radius: 5vh;
+    font-size: 20px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .8);
+}
+.dat {
+    background: #7972e6;
+    margin: 0 auto;
+    width: 92vw;
+    margin-top: 2vh;
+    padding: 0 2vh 2vh 2vh;
+}
+.cont {
+    background: #7972e6;
+    margin: 0 auto;
+    width: 92vw;
+    margin-top: 2vh;
+}
+.contd {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3vh 1vh 3vh;
+}
+.att {
+    background: #7972e6;
+    margin: 0 auto;
+    width: 92vw;
+    margin-top: 2vh;
+}
+.attf {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 3vw 5vw 3vw;
+}
+.attf div {
+    background: #fff;
+    font-size: 18px;
+    padding: 1vh 6vh;
+    border-radius: 2vw;
+}
+.datd {
+    border-radius: 2vh;
+    background: #d9d9d9;
+}
+.datd div {
+    padding: 2vh;
+    font-size: 14px;
+    border-bottom: 1px solid #333;
+}
+.tm {
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    padding: 1vh;
+}
+.dat .tab {
+    background: #fff;
+}
+.dat .tab th {
+    text-align: left;
+    padding: 2vh 0;
+    box-shadow: 0 5px 0 0 rgba(0, 0, 0, .5);
+}
+.dat .tab tbody td {
+    padding: 2vh 0;
+    border-right: 1px solid #000;
+}
+.emp {
+    padding: 2vh;
+}
+.title {
+    text-align: center;
+    font-size: 18px;
+    padding: 1vh;
+}
+.h {
+    background: #fff;
+    margin: 2vh;
+    padding: 5vh 3vh;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .3);
+    font-size: 14px;
+}
+.hf {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1vh;
+    font-size: 16px;
+}
+.b {
+    float: right;
+    text-align: center;
+    padding: 2vh 4vh;
+    background: #7972e6;
+    color: #fff;
+    border-radius: 7vw;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .5);
+}
+form {
+    margin: 4vh 0 4vh 0;
+}
+.hh {
+    margin: 3vh;
+    padding: 2vh;
+    height: 50vh;
+    background: #7972e6;
+    color: #fff;
+    font-size: 14px;
+}
+.hh table thead th {
+    text-align: left;
+    border-bottom: 1px solid #fff;
+    margin: 5vh;
+    padding: 2vh 1vh;
+    border-right: 1px solid #fff;
+}
+.hh table thead th:nth-child(3) {
+    border-right: none;
+}
+.hh table tbody tr td {
+    border-right: 1px solid #fff;
+    margin: 5vh;
+    padding: 2vh 1vh;
+}
+.hh table tbody tr td:nth-child(3) {
+    border-right: none;
+}
+footer {
+    position: absolute;
+    width: 100vw;
+    bottom: 0;
+}
+footer div {
+    text-align: center;
+    font-size: 20px;
+    margin: 5vw;
+}
+footer div span {
+    color: red;
+}

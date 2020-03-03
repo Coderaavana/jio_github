@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/matstyle.css" media="screen,projection">
+    <link rel="stylesheet" href="css/home1.css" media="screen,projection">
+    <link rel="stylesheet" href="css/my.min.css">
+    <script src="cordova.js" type="text/javascript"></script> 
+</head>
+<body>
+<div class="head">
+  <div class="content">
+    <a href="javascript: window.history.go(-1)"><div class="left"><img src="icon/left.png"></div></a>
+    <div class="middles">Credit Received<img src="icon/menu.png" style="margin:0.5vw 0 0 8vw;"></div>
+    <div class="right"><a href="logout.html"><img src="icon/logout.png"></a></div>
+  </div>  
+</div>
+
+<div class="profile">
+  <div class="img" style="margin:0px auto;margin-top:2vh;"><img src="icon/user.png" id="user_img"></div>
+  <div class="dls"  style="margin:0px auto;margin-bottom: 2vh;">
+    <table>
+      <tr>
+        <td><p>Name</p></td>
+        <td><p id="name">Name Comes Here</p></td>
+      </tr>
+      <tr>
+        <td><p>Email</p></td>
+        <td><p id="email">Mail ID Comes Here</p></td>
+      </tr>
+      <tr>
+        <td><p>Mobile</p></td>
+        <td><p id="mobile">Mobile Number</p></td>
+      </tr>
+      <tr>
+        <td><p>Category</p></td>
+        <td><p id="category">Category</p></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="ba">
+  <div class="baa">Balance</div>
+  <div class="bab">1,000/-Cr</div>
+</div>
+
+<form id="add_credit_form">
+<div class="form">
+  <input type="text" placeholder="Amount" id="amount" name="amount">
+  <input type="date" placeholder="date" id="date" name="date">
+  <input type="text" placeholder="Narration" id="narration" name="narration">
+  <input type="text" placeholder="Remarks (Personal note)" id="remarks" name="remarks">
+  <input type="hidden" name="user_id" id="user_id" />
+  <input type="hidden" name="cust_id" id="cust_id" />
+  <input type="hidden" name="category_id" id="category_id" />
+</div>
+
+<div class="add"><button type="submit" id="add_credit">Add Credit</button></div>
+</form>
+</body>
+<script  type="text/javascript" src="js/jquery.min.js"></script>   
+<script type="text/javascript" src="js/geturi.js"></script>
+<script src="js/getservices.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {        
+        var id = decodeURI(getUrlVars()["cid"]);  
+        var user_id=window.localStorage.getItem("uid");
+
+        var service = getservice();
+        var url = service+'customer_detail_single.php?cid='+id;
+        $.getJSON(url, function(field) {                         
+              $("#name").html(field.cusName);
+              $("#email").html(field.cusEmail);
+              $("#mobile").html(field.cusMobile);
+              $("#category").html(field.cusCategory);                
+              $("#user_img").attr("src", service+field.cusPhotoThumb);      
+              $("#category_id").val(field.catID);        
+        });          
+              $("#user_id").val(user_id);
+              $("#cust_id").val(id);
+              
+    });    
+    
+    $("#add_credit_form").submit(function(e) {
+    e.preventDefault();
+    var dataString = new FormData(this);
+    var service = getservice();
+    var uri = service+'credit_received.php';
+		 $.ajax({
+            type: 'POST',
+            url: uri,
+            data: dataString,
+            // dataType: "text",
+            crossDomain: true,
+            cache:false,
+            processData: false,
+            contentType: false,
+            success: function(data){
+            	var objData = jQuery.parseJSON(data);
+	            	if(objData['code'] == 0)
+	            	{
+	            		alert(objData['msg']);
+						      setTimeout(function()
+		              {
+		                location.reload();
+		              }, 1000); 
+                }
+                else
+                {
+                  alert(objData['msg']);
+                }
+              },
+    });	
+  });	
+</script>
+</html>

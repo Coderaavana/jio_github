@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/matstyle.css" media="screen,projection">
+    <link rel="stylesheet" href="css/home1.css" media="screen,projection">
+    <link rel="stylesheet" href="css/my.min.css">
+    <script src="cordova.js" type="text/javascript"></script>
+    <style>
+    label{    
+    display: table;
+    color: #fff;
+    background: #fff;
+    margin-top: 2vh;
+    color: #000;
+    padding: 1vh 4vh;
+    border-radius: 5vh;
+    font-size: 20px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.8);
+     }
+    input[type="file"] {
+        display: none;
+    }
+    </style>
+</head>
+<body>
+<div class="head">
+  <div class="content">
+    <a href="customers.html"><div class="left"><img src="icon/left.png"></div></a>
+    <div class="middle">VM Distributors<img src="icon/menu.png" style="margin:0.5vw 0 0 8vw;"></div>
+    <div class="right"><a href="logout.html"><img src="icon/logout.png"></a></div>
+  </div>  
+</div>
+
+<div class="profile">
+  <div class="img" style="margin:0px auto;margin-top:2vh;"><img src="icon/user.png" id="user_img"></div>
+  <div class="dls"  style="margin:0px auto;">
+    <table>
+      <tr>
+        <td><p>Name</p></td>
+        <td><p id="name">Name Comes Here</p></td>
+      </tr>
+      <tr>
+        <td><p>Email</p></td>
+        <td><p id="email">Mail ID Comes Here</p></td>
+      </tr>
+      <tr>
+        <td><p>Mobile</p></td>
+        <td><p id="mobile">Mobile Number</p></td>
+      </tr>
+      <tr>
+        <td><p>Category</p></td>
+        <td><p id="category">Category</p></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="loc">
+  <button type="button" id="ping_location" style="float:left;">Ping</button>
+  <label style="float:right;"> Shop Photo
+    <input type="file" id="store_photo" value="Store Photo" >
+  </label>   
+
+</div>
+
+<div class="dat">
+  <div class="tm">As on Date</div>
+  <div class="datd">
+    <table>
+      <tbody>
+        <tr>
+          <td>Credit</td>
+          <td>:</td>
+          <td id="totCredit"></td>
+        </tr>
+        <tr>
+          <td>Debit</td>
+          <td>:</td>
+          <td id="totDebit"></td>
+        </tr>
+        <tr>
+          <td style="border-bottom:0px">Balanc</td>
+          <td style="border-bottom:0px">:</td>
+          <td style="border-bottom:0px" id="totBalance"></td>
+        </tr>
+      </tbody>
+    </table>            
+  </div>
+</div>
+
+<div class="cont">
+  <div class="tm">Contact</div>
+  <div class="contd">
+    <a id="ico_mbno"><div class="img" ><img src="icon/call.png"></div></a>
+    <a id="ico_mail"><div class="img" ><img src="icon/mail.png"></div></a>
+    <a id="ico_sms"><div class="img" ><img src="icon/sms.png"></div></a>
+    <!-- href="sms://+919999999999?body=Hello%20World!" -->
+  </div>
+</div>
+
+<div class="att">
+  <div class="tm">Add</div>
+  <div class="attf">
+    <a id="href_credit" href="add_credit.html"><div>Credit</div></a>
+    <a id="href_debit" href="add_debit.html"><div>Debit</div></a>
+  </div>
+</div>
+
+<div class="dat">
+  <div class="tm">Account Ledger</div>
+  <div class="tab">
+    <table>
+      <thead>
+        <tr>
+        <th>Date</th>
+        <th>Credit</th>
+        <th>Debit</th>
+        <th>Balance</th>
+      </tr>
+      </thead>
+      <tbody id="history">
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="emp"></div>
+</body>
+<script  type="text/javascript" src="js/jquery.min.js"></script>   
+<script type="text/javascript" src="js/geturi.js"></script>
+<script src="js/getservices.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {        
+        var id = decodeURI(getUrlVars()["cust_id"]);  
+        var service = getservice();
+        var url = service+'customer_details.php?cid='+id;
+        $.getJSON(url, function(field) {                         
+              $("#name").html(field.cusName);
+              $("#email").html(field.cusEmail);
+              $("#mobile").html(field.cusMobile);
+              $("#category").html(field.cusCategory);                
+              $("#user_img").attr("src", service+field.cusPhotoThumb);
+
+              //Loading contact details
+              $("#ico_mbno").attr('href', 'tel://'+field.cusMobile);
+              $("#ico_mail").attr('href', 'mailto://'+field.cusEmail);
+              $("#ico_sms").attr('href', 'sms://'+field.cusMobile);
+
+              //add href to add debit and credit
+              $("#href_credit").attr('href', 'add_credit.html?cid='+field.cusID);
+              $("#href_debit").attr('href', 'add_debit.html?cid='+field.cusID);
+
+              //for the as on date
+              $("#totCredit").html('Rs.'+field.totalCredit+' /-');
+              $("#totDebit").html('Rs.'+field.totalDebit+' /-');
+              $("#totBalance").html('Rs.'+field.balance+' /-');
+
+
+              $.each(field.history, function(i, history) {                   
+                $('#history').append('<tr><td>'+history.date+'</td><td>'+history.credit+'</td><td>'+history.debit+'</td><td>Rs. '+history.balance+'/-</td></tr>');            
+              });
+        });          
+    });    
+</script>
+</html>
