@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/matstyle.css" media="screen,projection">
     <link rel="stylesheet" href="css/home1.css" media="screen,projection">
     <link rel="stylesheet" href="css/my.css">
-    
+    <script src="cordova.js"></script>
     <script type="text/javascript">
       var url = window.location.pathname;
       var filename = url.substring(url.lastIndexOf('/')+1);
@@ -51,7 +51,7 @@
   $(document).ready(function() {  
     $(".loader").fadeOut("slow");        
   });
-  
+
   $("#login").click(function(e){
   var service = getservice();
   var url = service+'login.php';
