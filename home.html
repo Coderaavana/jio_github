@@ -9,6 +9,81 @@
     <script src="cordova.js"></script>    
       <script type="text/javascript">
         document.addEventListener("deviceready", onDeviceReady, false);
+        function init()
+        {
+            document.addEventListener('deviceready', function() {
+            //  var exitApp = false, intval = setInterval(function (){exitApp = false;}, 3000);
+            document.addEventListener("backbutton",onBackKeyDown,!1)
+            function onBackKeyDown(a) {
+                a.preventDefault(),navigator.notification.confirm("Are you sure you want to exit ?",onConfirm,"Confirmation","Yes,No")
+            }
+            function onConfirm(a) {
+                2!=a&&navigator.app.exitApp()
+            }            
+        }, false);
+
+        }
+
+  function onDeviceReady(){
+      init();
+      var url = window.location.pathname;
+      var filename = url.substring(url.lastIndexOf('/')+1);
+      if(localStorage.login=="true" && filename == 'index.html')
+      {
+        window.location.href = "home.html";
+      }
+      else if(localStorage.login=="false" && filename != 'index.html'){
+        window.location.href = "index.html";
+      }
+
+
+      var output = window.localStorage.getItem("uname") ;      
+      document.getElementById("name").innerHTML = output;
+
+      var phone = window.localStorage.getItem("phone");
+      document.getElementById("con").innerHTML = phone;
+              
+      var email = window.localStorage.getItem("uemail");
+      document.getElementById("mail").innerHTML = email;
+
+      var service = getservice();
+      var id=window.localStorage.getItem("uid");
+
+        /********** Push Notification Token *********/
+        // try {
+        //   if (window.FirebasePlugin == null) {
+        //       console.log("Firebase plugin is null");
+        //   }
+        //   // only ios
+        //   window.FirebasePlugin.grantPermission();
+
+        //   window.FirebasePlugin.getToken(function (token) {                                 
+        //           localStorage.setItem('fcmtoken', token);                        
+        //   });
+        // }
+        // catch (e) {
+        //   console.log(e);
+        // }        
+  }
+
+
+
+function checkConnection() {
+        navigator.network.connection.type==Connection.NONE?window.plugins.toast.showLongBottom("It Seems No internet Connection. Please check connection and retry !",function(a) {
+              console.log("toast success: "+a)
+        }
+        ,function(a) {
+          alert("toast error: "+a)
+        }
+    ):
+        navigator.network.connection.type==Connection.CELL_2G&&window.plugins.toast.showLongBottom("It Seems low internet Connection !",function(a) {
+        console.log("toast success: "+a)
+    }
+    ,function(a) {
+      alert("toast error: "+a)
+    }
+    )
+}
       </script>
 </head>
 <body onload="init()">
