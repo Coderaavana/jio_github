@@ -45,6 +45,9 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
     <name>VM-Jio</name>
     <description>
         Accounting App for Jio

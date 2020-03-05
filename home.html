@@ -50,9 +50,9 @@ function init()
 
         }
 $(document).ready(function() {
-  //document.addEventListener("deviceready", onDeviceReady, false);  //Unhide this for mobile
+  document.addEventListener("deviceready", onDeviceReady, false);  //Unhide this for mobile
   //$(".loader").fadeOut("slow");        
-  onDeviceReady();  
+  //onDeviceReady();  
 });
   function onDeviceReady(){
 
@@ -97,7 +97,7 @@ $(document).ready(function() {
   }
 
 
-/*
+
 function checkConnection() {
         navigator.network.connection.type==Connection.NONE?window.plugins.toast.showLongBottom("It Seems No internet Connection. Please check connection and retry !",function(a) {
               console.log("toast success: "+a)
@@ -113,7 +113,7 @@ function checkConnection() {
       alert("toast error: "+a)
     }
     )
-}*/
+}
 
 // $(window).on('load', function() {
 //   ////////////// FCM Insert in DB - Only Registered Users ////////////////
