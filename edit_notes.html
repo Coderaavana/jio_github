@@ -12,7 +12,7 @@
 
 
 <body>
-
+<div class="loader"></div>
 <div class="head">
   <div class="content">
     <a href="javascript: window.history.go(-1)"><div class="left"><img src="icon/left.png"></div></a>
@@ -41,6 +41,7 @@
 <script type="text/javascript" src="js/geturi.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
+    $(".loader").fadeOut("slow");        
     var id = decodeURI(getUrlVars()["notes_id"]); 
     $("#notes_id").val(id);      
     var service = getservice();

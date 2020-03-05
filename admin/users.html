@@ -3,18 +3,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="css/matstyle.css" media="screen,projection">
-    <link rel="stylesheet" href="css/home1.css" media="screen,projection">
-    <link rel="stylesheet" href="css/my.css">
+    <link rel="stylesheet" href="../css/matstyle.css" media="screen,projection">
+    <link rel="stylesheet" href="../css/home1.css" media="screen,projection">
+    <link rel="stylesheet" href="../css/my.css">
     
     <script type="text/javascript">
       var url = window.location.pathname;
       var filename = url.substring(url.lastIndexOf('/')+1);
-       if(localStorage.login=="true" && filename == 'users.html')
+       if(localStorage.adminlogin=="true" && filename == 'users.html')
        {
          window.location.href = "home.html";
        }
-       else if(localStorage.login=="false" && filename != 'users.html')
+       else if(localStorage.adminlogin=="false" && filename != 'users.html')
        {
          window.location.href = "users.html";
         }
@@ -26,7 +26,7 @@
   <div class="title">
     <span>VM</span><br>Distributors
   </div>
-  <div class="sub">FCM LOGIN</div>
+  <div class="sub">ADMIN LOGIN</div>
 </div>
   
   
@@ -45,8 +45,8 @@
   <div style="margin:0 auto;bottom:0;">Powered By<br><span>CodeRaavana</span></div>
 </footer>
 </body>
-<script  type="text/javascript" src="js/jquery.min.js"></script>
-<script src="js/getservices.js"></script>
+<script  type="text/javascript" src="../js/jquery.min.js"></script>
+<script src="../js/getservices.js"></script>
 <script>
   $(document).ready(function() {  
     $(".loader").fadeOut("slow");        
@@ -61,7 +61,7 @@
     //var gcmid=$("#gcm").val();
 
 
-    var dataString="uname="+UserName+"&password="+password+"&etype=FSC";
+    var dataString="uname="+UserName+"&password="+password+"&etype=Admin";
     e.preventDefault();
     if ($.trim(UserName).length == 0)
       {
@@ -87,6 +87,7 @@
           var objData = data;
 	          if(objData['code'] == 0)	            	
             {
+              console.log(data);
               location.href="getsession.html?name="+data.UserName+"&id="+data.ID+"&email="+data.Email+"&phone="+data.phone+"&type="+data.etype;
               $("#login").html('Login');
             }

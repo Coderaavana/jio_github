@@ -3,9 +3,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="css/matstyle.css" media="screen,projection">
-    <link rel="stylesheet" href="css/home1.css" media="screen,projection">
-    <link rel="stylesheet" href="css/my.min.css">
+    <link rel="stylesheet" href="../css/matstyle.css" media="screen,projection">
+    <link rel="stylesheet" href="../css/home1.css" media="screen,projection">
+    <link rel="stylesheet" href="../css/my.min.css">
     
     <style>
     label{    
@@ -28,14 +28,14 @@
 <div class="loader"></div>
 <div class="head">
   <div class="content">
-    <a href="customers.html"><div class="left"><img src="icon/left.png"></div></a>
-    <div class="middle">VM Distributors<img src="icon/menu.png" style="margin:0.5vw 0 0 8vw;"></div>
-    <div class="right"><a href="logout.html"><img src="icon/logout.png"></a></div>
+    <a href="customers.html"><div class="left"><img src="../icon/left.png"></div></a>
+    <div class="middle">VM Distributors<img src="../icon/menu.png" style="margin:0.5vw 0 0 8vw;"></div>
+    <div class="right"><a href="logout.html"><img src="../icon/logout.png"></a></div>
   </div>  
 </div>
 
 <div class="profile">
-  <div class="img" style="margin:0px auto;margin-top:2vh;"><img src="icon/user.png" id="user_img"></div>
+  <div class="img" style="margin:0px auto;margin-top:2vh;"><img src="../icon/user.png" id="user_img"></div>
   <div class="dls"  style="margin:0px auto;">
     <table>
       <tr>
@@ -93,9 +93,9 @@
 <div class="cont">
   <div class="tm">Contact</div>
   <div class="contd">
-    <a id="ico_mbno"><div class="img" ><img src="icon/call.png"></div></a>
-    <a id="ico_mail"><div class="img" ><img src="icon/mail.png"></div></a>
-    <a id="ico_sms"><div class="img" ><img src="icon/sms.png"></div></a>
+    <a id="ico_mbno"><div class="img" ><img src="../icon/call.png"></div></a>
+    <a id="ico_mail"><div class="img" ><img src="../icon/mail.png"></div></a>
+    <a id="ico_sms"><div class="img" ><img src="../icon/sms.png"></div></a>
     <!-- href="sms://+919999999999?body=Hello%20World!" -->
   </div>
 </div>
@@ -129,15 +129,22 @@
 
 <div class="emp"></div>
 </body>
-<script  type="text/javascript" src="js/jquery.min.js"></script>   
-<script type="text/javascript" src="js/geturi.js"></script>
-<script src="js/getservices.js"></script>
+<script  type="text/javascript" src="../js/jquery.min.js"></script>   
+<script type="text/javascript" src="../js/geturi.js"></script>
+<script src="../js/getservices.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {     
         $(".loader").fadeOut("slow");           
         var id = decodeURI(getUrlVars()["cust_id"]);  
         var service = getservice();
         var url = service+'customer_details.php?cid='+id;
+        var type=window.localStorage.getItem("type");
+
+        if(type == "Admin")
+        {
+          $(".att").hide();
+        }
+
         $.getJSON(url, function(field) {                         
               $("#name").html(field.cusName);
               $("#email").html(field.cusEmail);
