@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../css/matstyle.css" media="screen,projection">
     <link rel="stylesheet" href="../css/home1.css" media="screen,projection">
     <link rel="stylesheet" href="../css/my.min.css">
-    <script src="cordova.js"></script>
+    <script src="../cordova.js"></script>
     
     <style>
     label{    
@@ -141,10 +141,10 @@
         var url = service+'customer_details.php?cid='+id;
         var type=window.localStorage.getItem("type");
 
-        if(type == "Admin")
-        {
-          $(".att").hide();
-        }
+        // if(type == "Admin")
+        // {
+        //   $(".att").hide();
+        // }
 
         $.getJSON(url, function(field) {                         
               $("#name").html(field.cusName);
