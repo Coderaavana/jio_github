@@ -48,6 +48,9 @@ xmlns:android="http://schemas.android.com/apk/res/android">
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
+    <feature name="BarcodeScanner">
+        <param name="android-package" value="com.phonegap.plugins.barcodescanner.BarcodeScanner" />
+    </feature>
     <name>VM-Jio</name>
     <description>
         Accounting App for Jio

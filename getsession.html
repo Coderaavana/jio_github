@@ -17,14 +17,14 @@
         var id = decodeURI(getUrlVars()["id"]);
         var email = decodeURI(getUrlVars()["email"]);
         var phone = decodeURI(getUrlVars()["phone"]);
-        var type = decodeURI(getUrlVars()["type"]);
+        var type = decodeURI(getUrlVars()["type"]);        
 
         localStorage.login="true";
 		localStorage.uname=name;
         localStorage.uid=id;     
         localStorage.uemail=email;
         localStorage.phone=phone;
-        localStorage.type=type;
+        localStorage.type=type;        
 
         var url = window.location.pathname;
         var filename = url.substring(url.lastIndexOf('/')+1);

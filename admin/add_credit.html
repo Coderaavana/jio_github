@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../css/matstyle.css" media="screen,projection">
     <link rel="stylesheet" href="../css/home1.css" media="screen,projection">
     <link rel="stylesheet" href="../css/my.min.css">
-    <script src="../cordova.js"></script> 
+    <!-- <script src="../cordova.js"></script>  -->
         
 </head>
 <body>
@@ -54,6 +54,10 @@
   <input type="date" placeholder="date" id="date" name="date" placeholder="Enter Date">
   <input type="text" placeholder="Narration" id="narration" name="narration">
   <input type="text" placeholder="Remarks (Personal note)" id="remarks" name="remarks">
+  <div class="device_scan">
+    <input type="text" placeholder="Device ID Comes Here" id="device_id" name="device_id" style="width:65%">
+    <a type="button"  id="scan_document" href="javascript:scan();" style="background: #7972e6;color: #fff;width: 30%;padding: 2vh;float: right;text-align:center;">Scan Code</a>
+  </div>
   <input type="hidden" name="user_id" id="user_id" />
   <input type="hidden" name="cust_id" id="cust_id" />
   <input type="hidden" name="category_id" id="category_id" />
@@ -66,6 +70,38 @@
 <script type="text/javascript" src="../js/geturi.js"></script>
 <script src="../js/getservices.js"></script>
 <script type="text/javascript">
+
+function scan()
+{
+    cordova.plugins.barcodeScanner.scan(
+        function (result) {
+            if(!result.cancelled)
+            {
+                if(result.format == "QR_CODE")
+                {
+                    alert(result);
+                    // navigator.notification.prompt("Please enter name of data",  function(input){
+                    //     var name = input.input1;
+                    //     var value = result.text;
+
+                    //     var data = localStorage.getItem("LocalData");
+                    //     console.log(data);
+                    //     data = JSON.parse(data);
+                    //     data[data.length] = [name, value];
+
+                    //     localStorage.setItem("LocalData", JSON.stringify(data));
+
+                    //     alert("Done");
+                    // });
+                }
+            }
+        },
+        function (error) {
+            alert("Scanning failed: " + error);
+        }
+   );
+}
+
     $(document).ready(function() {        
         $(".loader").fadeOut("slow");        
         var id = decodeURI(getUrlVars()["cid"]);  
