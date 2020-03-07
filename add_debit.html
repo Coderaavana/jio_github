@@ -48,7 +48,7 @@
 
 <div class="ba">
   <div class="baa">Balance</div>
-  <div class="bab">1,000/-Cr</div>
+  <div class="bab" id="balance"></div>
 </div>
 
 <form id="add_credit_form" enctype="multipart/form-data">
@@ -93,7 +93,8 @@
               $("#mobile").html(field.cusMobile);
               $("#category").html(field.cusCategory);                
               $("#user_img").attr("src", service+field.cusPhotoThumb);      
-              $("#category_id").val(field.catID);        
+              $("#category_id").val(field.catID);   
+              $("#balance").html("Rs. "+field.balance+"/-");     
         });          
               $("#user_id").val(user_id);
               $("#cust_id").val(id);

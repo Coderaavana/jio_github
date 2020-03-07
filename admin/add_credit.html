@@ -14,7 +14,7 @@
 <div class="head">
   <div class="content">
     <a href="javascript: window.history.go(-1)"><div class="left"><img src="../icon/left.png"></div></a>
-    <div class="middles">Credit Received<img src="icon/menu.png" style="margin:0.5vw 0 0 8vw;"></div>
+    <div class="middles">Credit Received<img src="../icon/menu.png" style="margin:0.5vw 0 0 8vw;"></div>
     <div class="right"><a href="logout.html"><img src="../icon/logout.png"></a></div>
   </div>  
 </div>
@@ -45,7 +45,7 @@
 
 <div class="ba">
   <div class="baa">Balance</div>
-  <div class="bab">1,000/-Cr</div>
+  <div class="bab" id="balance"></div>
 </div>
 
 <form id="add_credit_form">
@@ -79,7 +79,8 @@
               $("#mobile").html(field.cusMobile);
               $("#category").html(field.cusCategory);                
               $("#user_img").attr("src", service+field.cusPhotoThumb);      
-              $("#category_id").val(field.catID);        
+              $("#category_id").val(field.catID);   
+              $("#balance").html("Rs. "+field.balance+"/-");     
         });          
               $("#user_id").val(user_id);
               $("#cust_id").val(id);
