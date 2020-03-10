@@ -55,6 +55,7 @@
 </body>
 <script  type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/geturi.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
 <script src="../js/getservices.js"></script>
 <script> 
 $(document).ready(function() {  
@@ -73,6 +74,9 @@ $(document).ready(function() {
         $.getJSON(url, function(field) {                                       
               $("#add_phoyo").attr("src", service+field.shopPhoto);
         });      
+        $("img.lazy").lazyload({
+              effect : "fadeIn"
+        });
 });
 function readURL(input) {
   if (input.files && input.files[0]) {

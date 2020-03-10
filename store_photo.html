@@ -7,156 +7,108 @@
     <link rel="stylesheet" href="../css/home1.css" media="screen,projection">
     <link rel="stylesheet" href="../css/my.min.css">
     <script src="../cordova.js"></script> 
-    <link href="../css/jquery.signaturepad.css" rel="stylesheet">
     
-    
+    <style>
+        label{    
+        display: table;
+        color: #fff;
+        background: #fff;
+        margin-top: 2vh;
+        color: #000;
+        padding: 1vh 4vh;
+        border-radius: 5vh;
+        font-size: 20px;
+        box-shadow: 0 0 10px 0 rgba(0,0,0,.8);
+         }
+        input[type="file"] {
+            display: none;
+        }
+        </style>
 </head>
 
 
-<body>
+<body style="background: #fff;">
 <div class="loader"></div>
-  <div class="head">
-    <div class="content">
-      <a href="javascript: window.history.go(-1)"><div class="left"><img src="../icon/left.png"></div></a>
-      <div class="middles">Debit Payment<img src="../icon/menu.png" style="margin:0.5vw 0 0 8vw;"></div>
-      <div class="right"><a href="logout.html"><img src="../icon/logout.png"></a></div>
-    </div>  
-  </div>
-  
-  <div class="profile">
-    <div class="img" style="margin:0px auto;margin-top:2vh;"><img src="icon/user.png" id="user_img"></div>
-    <div class="dls"  style="margin:0px auto;margin-bottom: 2vh;">
-      <table>
-        <tr>
-          <td><p>Name</p></td>
-          <td><p id="name">Name Comes Here</p></td>
-        </tr>
-        <tr>
-          <td><p>Email</p></td>
-          <td><p id="email">Mail ID Comes Here</p></td>
-        </tr>
-        <tr>
-          <td><p>Mobile</p></td>
-          <td><p id="mobile">Mobile Number</p></td>
-        </tr>
-        <tr>
-          <td><p>Category</p></td>
-          <td><p id="category">Category</p></td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-<div class="ba">
-  <div class="baa">Balance</div>
-  <div class="bab" id="balance"></div>
+<div class="head">
+  <div class="content">
+    <a href="javascript: window.history.go(-1)"><div class="left"><img src="../icon/left.png"></div></a>
+    <div class="middle">Store Photo</div>
+    <div class="right"><a href="logout.html"><img src="../icon/logout.png"></a></div>
+  </div>  
 </div>
 
-<form id="add_credit_form" enctype="multipart/form-data">
-  <div class="form">
-    <input type="text" placeholder="Amount" id="amount" name="amount">
-    <input type="date" placeholder="date" id="date" name="date">
-    <input type="text" placeholder="Narration" id="narration" name="narration">
-    <input type="text" placeholder="Remarks (Personal note)" id="remarks" name="remarks">
-    <input type="hidden" name="user_id" id="user_id" />
-    <input type="hidden" name="cust_id" id="cust_id" />
-    <input type="hidden" name="category_id" id="category_id" />
-    <input type="hidden" name="sign" id="imageData" />
-    <label>Signature</label>
-    </br>
-    </br>    
+<div class="divbox1">
     <div>
-      <center>
-      <canvas class="pad" id="sign" width="290" height="100" style="border: 4px solid #ccc;border-radius: 5vw;"></canvas>          
-      <br>
-      <button type="button" id="save_sign" style="background: #7972e6;color: #fff;width: 50vw;font-size:3vh;padding: 2vh;">Save Signature</button></center>
+        Upload a Photo of Shop
     </div>
-  </div>
-  
-  <div class="add"><button type="submit" id="add_credit">Add Debit</button></div>
-  </form>
-
-<script  type="text/javascript" src="../js/jquery.min.js"></script>   
+</div>
+<form id="shop" method="POST">
+<div class="divbox2">
+    <img src="../icon/shop_default.png" id="shop_photo">
+</div>
+<label style="margin:0px auto;margin-top:5vh;"> Shop Photo
+    <input type="file" id="store_photo" value="" name="photo">
+</label>  
+<input type="hidden" name="cust_id"> 
+<div class="add"><button type="submit" id="add_phoyo">Add Photo</button></div>
+</form>  
+</body>
+<script  type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/geturi.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
 <script src="../js/getservices.js"></script>
-<script src="../js/jquery.signaturepad.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {          
-      $(".loader").fadeOut("slow");            
-        var id = decodeURI(getUrlVars()["cid"]);  
-        var user_id=window.localStorage.getItem("uid");
+<script> 
+$(document).ready(function() {  
+    $(".loader").fadeOut("slow");        
+    var id = decodeURI(getUrlVars()["cust_id"]);  
+    var service = getservice();
 
-        var service = getservice();
-        var url = service+'customer_detail_single.php?cid='+id;
-        $.getJSON(url, function(field) {                         
-              $("#name").html(field.cusName);
-              $("#email").html(field.cusEmail);
-              $("#mobile").html(field.cusMobile);
-              $("#category").html(field.cusCategory);                
-              $("#user_img").attr("src", service+field.cusPhotoThumb);      
-              $("#category_id").val(field.catID);               
-              if(field.balance == null)
-              {
-                $("#balance").html('Rs.0.00/-');
-              }
-              else
-              {
-                $("#balance").html('Rs.'+field.balance+' /-');
-              }        
-        });          
-              $("#user_id").val(user_id);
-              $("#cust_id").val(id);
-    });   
+        var url = service+'get_shop_image.php?cid='+id;
+        var type=window.localStorage.getItem("type");
 
-    (function(window) {
-    var $canvas,
-        onResize = function(event) {
-          $canvas.attr({
-            height: window.innerHeight,
-            width: window.innerWidth
-          });
-        };
+        // if(type == "Admin")
+        // {
+        //   $(".att").hide();
+        // }
 
-    $(document).ready(function() {
-      
-      $('form').signaturePad({
-        drawOnly: true,
-        defaultAction: 'drawIt',
-        validateFields: false,
-        lineWidth: 0,
-        output: null,
-        sigNav: null,
-        name: null,
-        typed: null,
-        clear: null,
-        typeIt: null,
-        drawIt: null,
-        typeItDesc: null,
-        drawItDesc: null
-      });
-    });
-  }(this));
+        $.getJSON(url, function(field) {                                       
+              $("#add_phoyo").attr("src", service+field.shopPhoto);
+        });      
 
-    $("#save_sign").click(function(e){
-      var imageData = document.getElementById("sign").toDataURL("image/png");  
-      $("#imageData").val(imageData);
-      alert("Done");
-    });
+        $("img.lazy").lazyload({
+              effect : "fadeIn"
+        });
 
-    $("#add_credit_form").submit(function(e) {
+});
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    
+    reader.onload = function(e) {
+      $('#shop_photo').attr('src', e.target.result);
+    }
+    
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#store_photo").change(function() {
+  readURL(this);
+});
+
+$("#shop").submit(function(e) {
     e.preventDefault();
     var dataString = new FormData(this);
-
     var service = getservice();
-    var uri = service+'debit_payment.php';         
-		$.ajax({
+    var uri = service+'add_shop_photo.php';
+		 $.ajax({
             type: 'POST',
             url: uri,
             data: dataString,
             // dataType: "text",
             crossDomain: true,
             cache:false,
-            beforeSend: function(){ $("#add_credit").html('Please Wait...');},
+            beforeSend: function(){ $("#add_phoyo").html('Please Wait...');},
             processData: false,
             contentType: false,
             success: function(data){
@@ -164,21 +116,20 @@
 	            	if(objData['code'] == 0)
 	            	{
 	            		alert(objData['msg']);
-                  $("#add_credit").html('Add Debit');
-						      setTimeout(function()
-		              {
-		                location.reload();
-		              }, 1000); 
+                        $("#add_phoyo").html('Add Photo');
+					    setTimeout(function()
+                        {
+                            location.reload();
+                        }, 1000); 
                 }
                 else
                 {
                   alert(objData['msg']);
-                  $("#add_credit").html('Add Debit');
+                  $("#add_phoyo").html('Add Photo');
                 }
               },
     });	
-});
-</script>    
+  });	
 
-</body>
+</script>
 </html>
