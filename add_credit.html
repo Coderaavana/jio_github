@@ -110,13 +110,13 @@ var scanApp = {
               $("#category_id").val(field.catID);    
               if(field.cusCategory == "Device")             
               {
-                $("#device_scan").show();
+                $(".device_scan").show();
               }
               else
               {
-                $("#device_scan").hide();
+                $(".device_scan").hide();
               }
-              
+
               if(field.balance == null)
               {
                 $("#balance").html('Rs.0.00/-');
