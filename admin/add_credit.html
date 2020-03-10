@@ -54,7 +54,7 @@
   <input type="date" placeholder="date" id="date" name="date" placeholder="Enter Date">
   <input type="text" placeholder="Narration" id="narration" name="narration">
   <input type="text" placeholder="Remarks (Personal note)" id="remarks" name="remarks">
-  <div class="device_scan">
+  <div class="device_scan" style="display: none;">
     <input type="text" placeholder="Device ID Comes Here" id="device_id" name="device_id" style="width:65%">
     <button type="button"  id="scan_document" onclick='scanApp.scan()' style="background: #7972e6;color: #fff;width: 30%;padding: 2vh;float: right;text-align:center;">Scan Code</button>
   </div>
@@ -140,7 +140,15 @@ var scanApp = {
               $("#mobile").html(field.cusMobile);
               $("#category").html(field.cusCategory);                
               $("#user_img").attr("src", service+field.cusPhotoThumb);      
-              $("#category_id").val(field.catID);                  
+              $("#category_id").val(field.catID);     
+              if(field.cusCategory == "Device")             
+              {
+                $("#device_scan").show();
+              }
+              else
+              {
+                $("#device_scan").hide();
+              }
               if(field.balance == null)
               {
                 $("#balance").html('Rs.0.00/-');
