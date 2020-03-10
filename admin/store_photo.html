@@ -60,6 +60,19 @@
 $(document).ready(function() {  
     $(".loader").fadeOut("slow");        
     var id = decodeURI(getUrlVars()["cust_id"]);  
+    var service = getservice();
+
+        var url = service+'get_shop_image.php?cid='+id;
+        var type=window.localStorage.getItem("type");
+
+        // if(type == "Admin")
+        // {
+        //   $(".att").hide();
+        // }
+
+        $.getJSON(url, function(field) {                                       
+              $("#add_phoyo").attr("src", service+field.shopPhoto);
+        });      
 });
 function readURL(input) {
   if (input.files && input.files[0]) {

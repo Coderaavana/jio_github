@@ -188,7 +188,7 @@ $("#ping_location").on('click', function(e)
                       // dataType: "text",
                       crossDomain: true,
                       cache:false,
-                      beforeSend: function(){ $("#ping_location").html('Loading...');},
+                      beforeSend: function(){ $("#ping_location").html('Wait...');},
                       processData: false,
                       contentType: false,
                       success: function(data){
