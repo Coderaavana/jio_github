@@ -72,7 +72,7 @@ $(document).ready(function() {
         // }
 
         $.getJSON(url, function(field) {                                       
-              $("#store_photo").attr("src", service+field.shopPhoto);
+              $("#shop_photo").attr("src", service+field.shopPhoto);
         });      
         $("img.lazy").lazyload({
               effect : "fadeIn"
