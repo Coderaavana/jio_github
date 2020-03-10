@@ -53,6 +53,10 @@
   <input type="date" placeholder="date" id="date" name="date" placeholder="Enter Date">
   <input type="text" placeholder="Narration" id="narration" name="narration">
   <input type="text" placeholder="Remarks (Personal note)" id="remarks" name="remarks">
+  <div class="device_scan">
+    <input type="text" placeholder="Device ID Comes Here" id="device_id" name="device_id" style="width:65%">
+    <button type="button"  id="scan_document" onclick='scanApp.scan()' style="background: #7972e6;color: #fff;width: 30%;padding: 2vh;float: right;text-align:center;">Scan Code</button>
+  </div>
   <input type="hidden" name="user_id" id="user_id" />
   <input type="hidden" name="cust_id" id="cust_id" />
   <input type="hidden" name="category_id" id="category_id" />
@@ -65,6 +69,31 @@
 <script type="text/javascript" src="js/geturi.js"></script>
 <script src="js/getservices.js"></script>
 <script type="text/javascript">
+var scanApp = {   
+    // Application Constructor
+    initialize: function () {
+        this.bindEvents();
+    },
+    bindEvents: function () {
+        document.addEventListener('deviceready', this.onDeviceReady);
+    },
+    onDeviceReady: function () {
+        console.log('Received Device Ready Event');
+        Log.initialize(app.displayLogLine);
+    },
+    scan: function () {
+        cordova.plugins.barcodeScanner.scan(
+                function (result) {
+                    $("#device_id").val(result.text);
+                    // alert("Barcode/QR code data\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
+                },
+                function (error) {
+                    alert("Scanning failed: " + error);
+                }
+        );
+    },
+};
+
     $(document).ready(function() {        
         $(".loader").fadeOut("slow");        
         var id = decodeURI(getUrlVars()["cid"]);  
@@ -98,6 +127,7 @@
             // dataType: "text",
             crossDomain: true,
             cache:false,
+            beforeSend: function(){ $("#add_credit_form").html('Please Wait...');},
             processData: false,
             contentType: false,
             success: function(data){
@@ -105,9 +135,10 @@
 	            	if(objData['code'] == 0)
 	            	{
 	            		alert(objData['msg']);
+                  $("#add_credit_form").html('Add Credit');
 						      setTimeout(function()
 		              {
-		                location.reload();
+		                window.location.href="customers.html";
 		              }, 1000); 
                 }
                 else

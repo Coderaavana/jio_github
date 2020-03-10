@@ -20,7 +20,7 @@
 </div>
 
 <div class="profile">
-  <div class="img" style="margin:0px auto;margin-top:2vh;"><img src="icon/user.png" id="user_img"></div>
+  <div class="img" style="margin:0px auto;margin-top:2vh;"><img src="../icon/user.png" id="user_img"></div>
   <div class="dls"  style="margin:0px auto;margin-bottom: 2vh;">
     <table>
       <tr>
@@ -86,7 +86,8 @@ var scanApp = {
     scan: function () {
         cordova.plugins.barcodeScanner.scan(
                 function (result) {
-                    alert("Barcode/QR code data\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
+                    $("#device_id").val(result.text);
+                    // alert("Barcode/QR code data\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
                 },
                 function (error) {
                     alert("Scanning failed: " + error);
@@ -139,8 +140,15 @@ var scanApp = {
               $("#mobile").html(field.cusMobile);
               $("#category").html(field.cusCategory);                
               $("#user_img").attr("src", service+field.cusPhotoThumb);      
-              $("#category_id").val(field.catID);   
-              $("#balance").html("Rs. "+field.balance+"/-");     
+              $("#category_id").val(field.catID);                  
+              if(field.balance == null)
+              {
+                $("#balance").html('Rs.0.00/-');
+              }
+              else
+              {
+                $("#balance").html('Rs.'+field.balance+' /-');
+              }
         });          
               $("#user_id").val(user_id);
               $("#cust_id").val(id);
@@ -159,6 +167,7 @@ var scanApp = {
             // dataType: "text",
             crossDomain: true,
             cache:false,
+            beforeSend: function(){ $("#add_credit").html('Please Wait...');},
             processData: false,
             contentType: false,
             success: function(data){
@@ -166,14 +175,16 @@ var scanApp = {
 	            	if(objData['code'] == 0)
 	            	{
 	            		alert(objData['msg']);
+                  $("#add_credit").html('Add Credit');
 						      setTimeout(function()
 		              {
-		                location.reload();
+		                window.location.href="customers.html";
 		              }, 1000); 
                 }
                 else
                 {
                   alert(objData['msg']);
+                  $("#add_credit").html('Add Credit');
                 }
               },
     });	

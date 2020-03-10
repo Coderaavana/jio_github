@@ -60,9 +60,10 @@
 </div>
 <div class="loc">
   <button type="button" id="ping_location" style="float:left;">Ping</button>
-  <label style="float:right;"> Shop Photo
-    <input type="file" id="store_photo" value="Store Photo" >
-  </label>   
+  <button type="button" style="float:right;" id="store_photo">Store Photo</button>
+  <!-- <label style="float:right;"> Shop Photo
+    <input type="file" id="store_photo" value="" >
+  </label>    -->
 
 </div>
 
@@ -165,7 +166,15 @@
               //for the as on date
               $("#totCredit").html('Rs.'+field.totalCredit+' /-');
               $("#totDebit").html('Rs.'+field.totalDebit+' /-');
-              $("#totBalance").html('Rs.'+field.balance+' /-');
+              if(field.balance == null)
+              {
+                $("#totBalance").html('Rs.0.00/-');
+              }
+              else
+              {
+                $("#totBalance").html('Rs.'+field.balance+' /-');
+              }
+              
 
 
               $.each(field.history, function(i, history) {                   
@@ -173,6 +182,11 @@
               });
         });          
     });  
+
+$("#store_photo").on('click',function(e){
+  var id = decodeURI(getUrlVars()["cust_id"]);  
+  window.location.href= 'store_photo.html?cust_id='+id;
+});
 
 $("#ping_location").on('click', function(e)
 {  
@@ -183,10 +197,34 @@ $("#ping_location").on('click', function(e)
     function onSuccess(position) {
         lati = position.coords.latitude;
         long = position.coords.longitude;
-        alert(lati);
-        alert(long);        
-        // $("#latitude").val(lati);
-        // $("#longitude").val(long);
+              var id = decodeURI(getUrlVars()["cust_id"]);  
+              var dataString="latitude="+lati+"&longitude="+long+"&cust_id="+id;
+              var service = getservice();
+              var uri = service+'update_location.php';
+              $.ajax({
+                      type: 'POST',
+                      url: uri,
+                      data: dataString,
+                      // dataType: "text",
+                      crossDomain: true,
+                      cache:false,
+                      beforeSend: function(){ $("#ping_location").html('Loading...');},
+                      processData: false,
+                      contentType: false,
+                      success: function(data){
+                        var objData = jQuery.parseJSON(data);
+                          if(objData['code'] == 0)
+                          {
+                            alert(objData['msg']);
+                            $("#ping_location").html('Ping');
+                          }
+                          else
+                          {
+                            alert(objData['msg']);
+                            $("#ping_location").html('Ping');
+                          }
+                        },
+              });	        
     }
 
     function onError(error) {

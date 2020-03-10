@@ -73,7 +73,7 @@
     </div>
   </div>
   
-  <div class="add"><button type="submit" id="add_credit">Add Credit</button></div>
+  <div class="add"><button type="submit" id="add_credit">Add Debit</button></div>
   </form>
 
 <script  type="text/javascript" src="../js/jquery.min.js"></script>   
@@ -94,8 +94,15 @@
               $("#mobile").html(field.cusMobile);
               $("#category").html(field.cusCategory);                
               $("#user_img").attr("src", service+field.cusPhotoThumb);      
-              $("#category_id").val(field.catID); 
-              $("#balance").html("Rs. "+field.balance+"/-");        
+              $("#category_id").val(field.catID);               
+              if(field.balance == null)
+              {
+                $("#balance").html('Rs.0.00/-');
+              }
+              else
+              {
+                $("#balance").html('Rs.'+field.balance+' /-');
+              }        
         });          
               $("#user_id").val(user_id);
               $("#cust_id").val(id);
@@ -149,6 +156,7 @@
             // dataType: "text",
             crossDomain: true,
             cache:false,
+            beforeSend: function(){ $("#add_credit").html('Please Wait...');},
             processData: false,
             contentType: false,
             success: function(data){
@@ -156,6 +164,7 @@
 	            	if(objData['code'] == 0)
 	            	{
 	            		alert(objData['msg']);
+                  $("#add_credit").html('Add Debit');
 						      setTimeout(function()
 		              {
 		                location.reload();
@@ -164,6 +173,7 @@
                 else
                 {
                   alert(objData['msg']);
+                  $("#add_credit").html('Add Debit');
                 }
               },
     });	
