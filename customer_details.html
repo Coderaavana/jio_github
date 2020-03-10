@@ -59,9 +59,7 @@
 </div>
 <div class="loc">
   <button type="button" id="ping_location" style="float:left;">Ping</button>
-  <label style="float:right;"> Shop Photo
-    <input type="file" id="store_photo" value="Store Photo" >
-  </label>   
+  <button type="button" style="float:right;" id="store_photo">Store Photo</button> 
 
 </div>
 
@@ -164,6 +162,55 @@
                 $('#history').append('<tr><td>'+history.date+'</td><td>'+history.credit+'</td><td>'+history.debit+'</td><td>Rs. '+history.balance+'/-</td></tr>');            
               });
         });          
-    });    
+    });   
+    $("#store_photo").on('click',function(e){
+  var id = decodeURI(getUrlVars()["cust_id"]);  
+  window.location.href= 'store_photo.html?cust_id='+id;
+});
+
+$("#ping_location").on('click', function(e)
+{  
+    e.preventDefault();
+
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+    function onSuccess(position) {
+        lati = position.coords.latitude;
+        long = position.coords.longitude;
+              var id = decodeURI(getUrlVars()["cust_id"]);  
+              var dataString="latitude="+lati+"&longitude="+long+"&cust_id="+id;
+              var service = getservice();
+              var uri = service+'update_location.php';
+              $.ajax({
+                      type: 'POST',
+                      url: uri,
+                      data: dataString,
+                      // dataType: "text",
+                      crossDomain: true,
+                      cache:false,
+                      beforeSend: function(){ $("#ping_location").html('Loading...');},
+                      processData: false,
+                      contentType: false,
+                      success: function(data){
+                        var objData = jQuery.parseJSON(data);
+                          if(objData['code'] == 0)
+                          {
+                            alert(objData['msg']);
+                            $("#ping_location").html('Ping');
+                          }
+                          else
+                          {
+                            alert(objData['msg']);
+                            $("#ping_location").html('Ping');
+                          }
+                        },
+              });	        
+    }
+
+    function onError(error) {
+        alert('code: ' + error.code + 'n' +
+        'message: ' + error.message + 'n');
+    }
+}); 
 </script>
 </html>

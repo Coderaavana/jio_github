@@ -108,7 +108,14 @@ var scanApp = {
               $("#category").html(field.cusCategory);                
               $("#user_img").attr("src", service+field.cusPhotoThumb);      
               $("#category_id").val(field.catID);    
-              $("#balance").html("Rs. "+field.balance+"/-");    
+              if(field.balance == null)
+              {
+                $("#balance").html('Rs.0.00/-');
+              }
+              else
+              {
+                $("#balance").html('Rs.'+field.balance+' /-');
+              }     
         });          
               $("#user_id").val(user_id);
               $("#cust_id").val(id);
@@ -127,7 +134,7 @@ var scanApp = {
             // dataType: "text",
             crossDomain: true,
             cache:false,
-            beforeSend: function(){ $("#add_credit_form").html('Please Wait...');},
+            beforeSend: function(){ $("#add_credit").html('Please Wait...');},
             processData: false,
             contentType: false,
             success: function(data){
@@ -135,7 +142,7 @@ var scanApp = {
 	            	if(objData['code'] == 0)
 	            	{
 	            		alert(objData['msg']);
-                  $("#add_credit_form").html('Add Credit');
+                  $("#add_credit").html('Add Credit');
 						      setTimeout(function()
 		              {
 		                window.location.href="customers.html";
@@ -144,6 +151,7 @@ var scanApp = {
                 else
                 {
                   alert(objData['msg']);
+                  $("#add_credit").html('Add Credit');
                 }
               },
     });	
