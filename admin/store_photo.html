@@ -62,7 +62,7 @@ $(document).ready(function() {
     $(".loader").fadeOut("slow");        
     var id = decodeURI(getUrlVars()["cust_id"]);  
     var service = getservice();
-
+    $("#cust_id").val(id);
         var url = service+'get_shop_image.php?cid='+id;
         var type=window.localStorage.getItem("type");
 
@@ -117,7 +117,7 @@ $("#shop").submit(function(e) {
                         $("#add_phoyo").html('Add Photo');
 					    setTimeout(function()
                         {
-                            location.reload();
+                         //   location.reload();
                         }, 1000); 
                 }
                 else
