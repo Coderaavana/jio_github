@@ -56,7 +56,7 @@
   <input type="text" placeholder="Remarks (Personal note)" id="remarks" name="remarks">
   <div class="device_scan">
     <input type="text" placeholder="Device ID Comes Here" id="device_id" name="device_id" style="width:65%">
-    <a type="button"  id="scan_document" href="javascript:scan();" style="background: #7972e6;color: #fff;width: 30%;padding: 2vh;float: right;text-align:center;">Scan Code</a>
+    <button type="button"  id="scan_document" onclick='scanApp.scan()' style="background: #7972e6;color: #fff;width: 30%;padding: 2vh;float: right;text-align:center;">Scan Code</button>
   </div>
   <input type="hidden" name="user_id" id="user_id" />
   <input type="hidden" name="cust_id" id="cust_id" />
@@ -71,36 +71,60 @@
 <script src="../js/getservices.js"></script>
 <script type="text/javascript">
 
-function scan()
-{
-    cordova.plugins.barcodeScanner.scan(
-        function (result) {
-            if(!result.cancelled)
-            {
-                if(result.format == "QR_CODE")
-                {
-                    alert(result);
-                    // navigator.notification.prompt("Please enter name of data",  function(input){
-                    //     var name = input.input1;
-                    //     var value = result.text;
-
-                    //     var data = localStorage.getItem("LocalData");
-                    //     console.log(data);
-                    //     data = JSON.parse(data);
-                    //     data[data.length] = [name, value];
-
-                    //     localStorage.setItem("LocalData", JSON.stringify(data));
-
-                    //     alert("Done");
-                    // });
+var scanApp = {   
+    // Application Constructor
+    initialize: function () {
+        this.bindEvents();
+    },
+    bindEvents: function () {
+        document.addEventListener('deviceready', this.onDeviceReady);
+    },
+    onDeviceReady: function () {
+        console.log('Received Device Ready Event');
+        Log.initialize(app.displayLogLine);
+    },
+    scan: function () {
+        cordova.plugins.barcodeScanner.scan(
+                function (result) {
+                    alert("Barcode/QR code data\n" + "Result: " + result.text + "\n" + "Format: " + result.format + "\n" + "Cancelled: " + result.cancelled);
+                },
+                function (error) {
+                    alert("Scanning failed: " + error);
                 }
-            }
-        },
-        function (error) {
-            alert("Scanning failed: " + error);
-        }
-   );
-}
+        );
+    },
+};
+
+// function scan()
+// {
+//     cordova.plugins.barcodeScanner.scan(
+//         function (result) {
+//             if(!result.cancelled)
+//             {
+//                 if(result.format == "QR_CODE")
+//                 {
+//                     alert(result);
+//                     // navigator.notification.prompt("Please enter name of data",  function(input){
+//                     //     var name = input.input1;
+//                     //     var value = result.text;
+
+//                     //     var data = localStorage.getItem("LocalData");
+//                     //     console.log(data);
+//                     //     data = JSON.parse(data);
+//                     //     data[data.length] = [name, value];
+
+//                     //     localStorage.setItem("LocalData", JSON.stringify(data));
+
+//                     //     alert("Done");
+//                     // });
+//                 }
+//             }
+//         },
+//         function (error) {
+//             alert("Scanning failed: " + error);
+//         }
+//    );
+// }
 
     $(document).ready(function() {        
         $(".loader").fadeOut("slow");        
