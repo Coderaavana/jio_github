@@ -172,6 +172,27 @@
                 $('#history').append('<tr><td>'+history.date+'</td><td>'+history.credit+'</td><td>'+history.debit+'</td><td>Rs. '+history.balance+'/-</td></tr>');            
               });
         });          
-    });    
+    });  
+
+$("#ping_location").on('click', function(e)
+{  
+    e.preventDefault();
+
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+    function onSuccess(position) {
+        lati = position.coords.latitude;
+        long = position.coords.longitude;
+        alert(lati);
+        alert(long);        
+        // $("#latitude").val(lati);
+        // $("#longitude").val(long);
+    }
+
+    function onError(error) {
+        alert('code: ' + error.code + 'n' +
+        'message: ' + error.message + 'n');
+    }
+});
 </script>
 </html>
