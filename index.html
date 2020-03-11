@@ -10,50 +10,7 @@
     <script src="cordova.js"></script>
     <title>VM Distributors</title>
     <!-- <script src="cordova.js"></script> -->
-    <script>
-      document.addEventListener("deviceready", onDeviceReady, false);
-
-      function onDeviceReady(){
-          init();
-          checkConnection();
-      } 
-
-function init()
-  {
-      document.addEventListener('deviceready', function() {
-      //  var exitApp = false, intval = setInterval(function (){exitApp = false;}, 3000);
-      document.addEventListener("backbutton",onBackKeyDown,!1)
-      function onBackKeyDown(a) {
-          a.preventDefault(),confirm("Are you sure you want to exit ?",onConfirm,"Confirmation","Yes,No")
-      }
-      function onConfirm(a) {
-          2!=a&&navigator.app.exitApp()
-      }            
-  }, false);
-
-  }
-  
-   
-
-
-function checkConnection() {
-      navigator.network.connection.type==Connection.NONE?window.plugins.toast.showLongBottom("It Seems No internet Connection. Please check connection and retry !",function(a) {
-            console.log("toast success: "+a)
-      }
-      ,function(a) {
-        alert("toast error: "+a)
-      }
-      ):
-      navigator.network.connection.type==Connection.CELL_2G&&window.plugins.toast.showLongBottom("It Seems low internet Connection !",function(a) {
-      console.log("toast success: "+a)
-      }
-      ,function(a) {
-        alert("toast error: "+a)
-      }
-    )
-}
-
-    </script>
+    
 </head>
 <body onload="init()">
   
@@ -85,4 +42,49 @@ function checkConnection() {
 </footer>
 
 </body>
+<script  type="text/javascript" src="js/jquery.min.js"></script>
+<script>
+  document.addEventListener("deviceready", onDeviceReady, false);
+
+  function onDeviceReady(){
+      init();
+      checkConnection();
+  } 
+
+function init()
+{
+  document.addEventListener('deviceready', function() {
+  //  var exitApp = false, intval = setInterval(function (){exitApp = false;}, 3000);
+  document.addEventListener("backbutton",onBackKeyDown,!1)
+  function onBackKeyDown(a) {
+      a.preventDefault(),confirm("Are you sure you want to exit ?",onConfirm,"Confirmation","Yes,No")
+  }
+  function onConfirm(a) {
+      2!=a&&navigator.app.exitApp()
+  }            
+}, false);
+
+}
+
+
+
+
+function checkConnection() {
+  navigator.network.connection.type==Connection.NONE?window.plugins.toast.showLongBottom("It Seems No internet Connection. Please check connection and retry !",function(a) {
+        console.log("toast success: "+a)
+  }
+  ,function(a) {
+    alert("toast error: "+a)
+  }
+  ):
+  navigator.network.connection.type==Connection.CELL_2G&&window.plugins.toast.showLongBottom("It Seems low internet Connection !",function(a) {
+  console.log("toast success: "+a)
+  }
+  ,function(a) {
+    alert("toast error: "+a)
+  }
+)
+}
+
+</script>
 </html>
