@@ -44,7 +44,7 @@ $(document).ready(function() {
         var url = service+'customer_list_admin.php';
         $.getJSON(url, function(result) {
             $.each(result, function(i, field) {                   
-              $('#view_customers').append('<a href="customer_details.html?cust_id='+field.cusID+'"><div class="container acpanel"><div class="div1"><img class="lazy" src="'+service+'customer_images_thumb/'+field.cusPhoto+'"></div><div class="div2"><p>'+field.cusName+'</p>'+field.cusEmail+'</div><div class="div3">'+field.cusCategory+'</div></div></a>');            
+              $('#view_customers').append('<a href="customer_details.html?cust_id='+field.cusID+'"><div class="container acpanel"><div class="div1"><img class="lazy" src="'+service+'customer_images_thumb/'+field.cusPhoto+'"></div><div class="div2"><p>'+field.cusName+'</p>'+field.cusEmail+'<br><p style="padding-top: 1vh;color: #4769b7;margin: 0px auto;text-align: center;"><b>'+field.fscUser+'</b></p></div><div class="div3">'+field.cusCategory+'</div></div></a>');            
             });                
         });  
         
