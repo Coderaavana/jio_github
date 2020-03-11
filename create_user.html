@@ -8,6 +8,18 @@
     <link rel="stylesheet" href="css/my.min.css">
     
     <script src="cordova.js"></script>
+    <style>
+      label{    
+      display: table;            
+      color: #000;
+      padding: 1vh 4vh;
+      height:10vh;                  
+      background-image: url(icon/user.png);
+       }
+      input[type="file"] {
+          display: none;
+      }
+      </style>
 </head>
 
 
@@ -31,8 +43,9 @@
     </div>
 
     <div class="pr"  id="upfile">      
-        <img src="icon/user.png">  
+      <label style="float:right;">
         <input type="file" class="img" accept="image/*" id="file" name="photo"/>
+      </label>
     </div>
 
     <div class="sc">
@@ -80,6 +93,7 @@
             // dataType: "text",
             crossDomain: true,
             cache:false,
+            beforeSend: function(){ $("#submit").html('Please Wait...');},
             processData: false,
             contentType: false,
             success: function(data){
@@ -87,6 +101,7 @@
 	            	if(objData['code'] == 0)
 	            	{
 	            		alert(objData['msg']);
+                  $("#submit").html('Create Account');
 						      setTimeout(function()
 		              {
 		                location.reload();
@@ -95,6 +110,7 @@
                 else
                 {
                   alert(objData['msg']);
+                  $("#submit").html('Create Account');
                 }
               },
     });	  

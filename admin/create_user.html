@@ -93,6 +93,7 @@
             // dataType: "text",
             crossDomain: true,
             cache:false,
+            beforeSend: function(){ $("#submit").html('Please Wait...');},
             processData: false,
             contentType: false,
             success: function(data){
@@ -100,6 +101,7 @@
 	            	if(objData['code'] == 0)
 	            	{
 	            		alert(objData['msg']);
+                  $("#submit").html('Create Account');
 						      setTimeout(function()
 		              {
 		                location.reload();
@@ -108,6 +110,7 @@
                 else
                 {
                   alert(objData['msg']);
+                  $("#submit").html('Create Account');
                 }
               },
     });	  
