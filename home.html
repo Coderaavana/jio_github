@@ -52,8 +52,7 @@ function init()
 
 }
 
-  function onDeviceReady(){
-      init();
+  function onDeviceReady(){      
       checkConnection();
       var url = window.location.pathname;
       var filename = url.substring(url.lastIndexOf('/')+1);
