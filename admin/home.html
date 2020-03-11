@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../css/matstyle.css" media="screen,projection">
     <link rel="stylesheet" href="../css/home1.css" media="screen,projection">
     <link rel="stylesheet" href="../css/my.min.css">
-    <script src="../cordova.js"></script>    
+    <script src="../cordova.js"></script>  
 </head>
 <body onload="init()">
 <div class="tt2">
@@ -35,6 +35,7 @@
 <script  type="text/javascript" src="../js/jquery.min.js"></script>
 <script src="../js/getservices.js"></script>
 <script type="text/javascript">
+document.addEventListener("deviceready", onDeviceReady, false);
 function init()
         {
             document.addEventListener('deviceready', function() {
@@ -49,13 +50,10 @@ function init()
         }, false);
 
         }
-$(document).ready(function() {
-  //document.addEventListener("deviceready", onDeviceReady, false);  //Unhide this for mobile
-  //$(".loader").fadeOut("slow");        
-  onDeviceReady();  
-});
-  function onDeviceReady(){
 
+  function onDeviceReady(){
+      init();
+      checkConnection();
       var url = window.location.pathname;
       var filename = url.substring(url.lastIndexOf('/')+1);
       if(localStorage.adminlogin=="true" && filename == 'index.html')
@@ -97,7 +95,7 @@ $(document).ready(function() {
   }
 
 
-/*
+
 function checkConnection() {
         navigator.network.connection.type==Connection.NONE?window.plugins.toast.showLongBottom("It Seems No internet Connection. Please check connection and retry !",function(a) {
               console.log("toast success: "+a)
@@ -113,7 +111,7 @@ function checkConnection() {
       alert("toast error: "+a)
     }
     )
-}*/
+}
 
 // $(window).on('load', function() {
 //   ////////////// FCM Insert in DB - Only Registered Users ////////////////
