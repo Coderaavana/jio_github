@@ -1,4 +1,3 @@
-cordova.define("cordova-plugin-firebase.FirebasePlugin", function(require, exports, module) {
 var exec = require('cordova/exec');
 
 exports.getVerificationID = function (number, success, error) {
@@ -168,4 +167,3 @@ exports.verifyPhoneNumber = function (number, timeOutDuration, success, error) {
 exports.clearAllNotifications = function (success, error) {
   exec(success, error, "FirebasePlugin", "clearAllNotifications", []);
 };
-});
