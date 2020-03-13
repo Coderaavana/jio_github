@@ -25,8 +25,6 @@
     <div>
         Scan This QR Code for Gpay
     </div>
-    <button onclick="RegisterWithFCM();">Register</button>
-    <button onclick="GetMessageFromGCM();">Message</button>
 </div>
 <div class="divbox2">
     <img src="icon/gpay.jpg">
@@ -37,61 +35,5 @@
 $(document).ready(function() {  
     $(".loader").fadeOut("slow");        
 });
-
-function RegisterWithFCM() {
-
-try {
-
-    if (window.FirebasePlugin == null) {
-
-        alert("FCMPlugin is null")
-
-        return;
-
-    }
-
-     window.FirebasePlugin.getToken(function (token) {
-
-        //”token” received from FCM server.
-
-        //It will get automatically registered in you device.No extra code is needed.
-
-         alert(token);
-
-        document.getElementById("txtGCMId").value = token;
-
-    });
-
-   }
-
-catch (e) {
-
-    alert(e);
-
-   }
-
-}
-
-
-
-function GetMessageFromGCM() {
-
-alert("onNotificationOpen");
-
- try {
-
-    window.FirebasePlugin.onNotificationOpen(function (data) {
-
-     alert(JSON.stringify(data));
-
-    });
-
-} catch (e) {
-
-    alert(e);
-
-}
-
-}
 </script>
 </html>
